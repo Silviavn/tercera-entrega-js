@@ -94,7 +94,7 @@ const verProductos = () => {
         const card = document.createElement("div");
         card.classList.add("col-xl-3", "col-md-6", "col-xs-12");
         card.innerHTML = `
-                                        <div class="card">
+                                <div class="card">
                                 <img src="${producto.img}" class="card-img-top imgProductos" alt="${producto.nombre}">
                                 <div class="card-body">
                                     <h5> ${producto.nombre}</h5>
@@ -104,19 +104,11 @@ const verProductos = () => {
                              </div>
                         `
         contenedorProductos.appendChild(card);
-        /*Luego hacemos un evento para que tome ese objeto y lo meta en el  array de productos osea que agregue los productos a el carrito*/
-
-        const boton = document.getElementById(`boton${producto.id}`);
-        boton.addEventListener("click", () => {
-            agregarAlCarrito(producto.id);
+       
         })
-
-    })
-}
+    }
 verProductos();
 
-
-/*min01:26*/
 
 
 
