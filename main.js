@@ -102,12 +102,36 @@ const verProductos = () => {
                                     <button id="boton ${producto.id}" class="btn colorBoton"> Agregar al carrito</button>
                                 </div>
                              </div>
-                        `
-        contenedorProductos.appendChild(card);
-       
-        })
-    }
-verProductos();
+                             `
+                             contenedorProductos.appendChild(card);
+
+                             //Agregar productos al carrito: 
+                             const boton = document.getElementById(`boton${producto.id}`);
+                             boton.addEventListener("click", () => {
+                                 agregarAlCarrito(producto.id);
+                             })
+                     
+                         })
+                     }
+                     
+                     verProductos();
+                     
+                     
+                     //Creamos la función de agregar al carrito: 
+                     
+                     const agregarAlCarrito = (id) => {
+                         const productoEnCarrito = carrito.find(producto => producto.id === id);
+                         if (productoEnCarrito) {
+                             productoEnCarrito.cantidad++;
+                         } else {
+                             const Producto = producto.find(producto => producto.id === id);
+                             carrito.push(producto);
+                         }
+                         calcularTotal();
+                         //Verificamos por consola:
+                         console.log(carrito);
+                     }
+                     
 
 
 
