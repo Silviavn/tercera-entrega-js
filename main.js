@@ -99,39 +99,39 @@ const verProductos = () => {
                                 <div class="card-body">
                                     <h5> ${producto.nombre}</h5>
                                     <p> ${producto.precio}</p>
-                                    <button id="boton ${producto.id}" class="btn colorBoton"> Agregar al carrito</button>
+                                    <button id="boton${producto.id}" class="btn colorBoton"> Agregar al carrito</button>
                                 </div>
                              </div>
                              `
-                             contenedorProductos.appendChild(card);
+        contenedorProductos.appendChild(card);
 
-                             //Agregar productos al carrito: 
-                             const boton = document.getElementById(`boton${producto.id}`);
-                             boton.addEventListener("click", () => {
-                                 agregarAlCarrito(producto.id);
-                             })
-                     
-                         })
-                     }
-                     
-                     verProductos();
-                     
-                     
-                     //Creamos la función de agregar al carrito: 
-                     
-                     const agregarAlCarrito = (id) => {
-                         const productoEnCarrito = carrito.find(producto => producto.id === id);
-                         if (productoEnCarrito) {
-                             productoEnCarrito.cantidad++;
-                         } else {
-                             const Producto = producto.find(producto => producto.id === id);
-                             carrito.push(producto);
-                         }
-                         calcularTotal();
-                         //Verificamos por consola:
-                         console.log(carrito);
-                     }
-                     
+        //Agregar productos al carrito: 
+        const boton = document.getElementById(`boton${producto.id}`);
+        boton.addEventListener("click", () => {
+            agregarAlCarrito(producto.id);
+        })
+
+    })
+}
+
+verProductos();
+
+
+//Creamos la función de agregar al carrito: 
+
+const agregarAlCarrito = (id) => {
+    const productoEnCarrito = carrito.find(producto => producto.id === id);
+    if (productoEnCarrito) {
+        productoEnCarrito.cantidad++;
+    } else {
+        const Producto = producto.find(producto => producto.id === id);
+        carrito.push(producto);
+    }
+    calcularTotal();
+    //Verificamos por consola:
+    console.log(carrito);
+}
+
 
 
 
