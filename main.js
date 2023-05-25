@@ -113,10 +113,7 @@ const verProductos = () => {
 
     })
 }
-
 verProductos();
-
-
 //Creamos la función de agregar al carrito: 
 
 const agregarAlCarrito = (id) => {
@@ -132,8 +129,76 @@ const agregarAlCarrito = (id) => {
     console.log(carrito);
 }
 
+/*Mostramos nuestro carrito de compras */
+const contenedorCarrito = document.getElementById("contenedorCarrito");
+const vemosCarrito = document.getElementById("vemosCarrito");
 
+vemosCarrito.addEventListener("click", () => {
+    mostrarCarrito();
 
+    })
+
+    /*Luego generamos la funcion para mostrar el carrito de compras*/
+
+    const mostrarCarrito = () => {
+        contenedorCarrito.innerHTML = "",
+        carrito.forEach(producto => {
+
+            const card = document.createElement("div");
+        card.classList.add("col-xl-3", "col-md-6", "col-xs-12");
+        card.innerHTML = `
+                                <div class="card">
+                                <img src="${producto.img}" class="card-img-top imgProductos" alt="${producto.nombre}">
+                                <div class="card-body">
+                                    <h5> ${producto.nombre}</h5>
+                                    <p> ${producto.precio}</p>
+                                    <p> ${producto.cantidad}</p>
+                                    <button id="eliminar${producto.id}" class="btn colorBoton">Eliminar</button>
+                                </div>
+                             </div>
+                             `
+                             contenedorCarrito.appendChild(card);
+
+                             /*Eliminamos productos seleccionados de nuestro carrito*/
+                             const boton = document.getElementById(`eliminar${producto.id}`);
+                             boton.addEventListener("click", ()=> {
+                            eliminarDelCarrito(producto.id);
+                             })
+        })
+        calcularTotal();
+    }
+
+    /*funcion para eliminar el producto de nuestro carrito */
+
+    const eliminarDelCarrito = (id) => {
+        const producto = carrito.find(producto=> producto.id === id);
+        const indice = carrito.lastIndexOf(producto);
+        carrito.splice(indice, 1);
+        mostrarCarrito();
+    }
+    /*Calculamos nuestro total en la compra */
+    const total = document.getElementById("total");
+    const calcularTotal = () => {
+        let totalCompra = 0;
+        carrito.forEach(producto => {
+            totalCompra += producto.precio = producto.cantidad;
+        })
+        total.innerHTML = `Total: $${totalCompra}`;
+    }
+/*vaciamos el carrito de compras*/
+const vaciarCarrito = document.getElementById ("vaciarCarrito");
+
+vaciarCarrito.addEventListener("click", () =>{
+    eliminarTodoElCarrito();
+})
+
+/*La funcion de eliminar el carrito*/
+
+const eliminarTodoElCarrito = () => {
+    carrito = [];
+    mostrarCarrito();
+}
+/*Falta localstorage*/
 
 
 
