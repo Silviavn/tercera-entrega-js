@@ -114,17 +114,18 @@ const verProductos = () => {
     })
 }
 verProductos();
-//Creamos la función de agregar al carrito: 
+//Creamos la función de agregar al carrito en singular: 
 
 const agregarAlCarrito = (id) => {
     const productoEnCarrito = carrito.find(producto => producto.id === id);
     if (productoEnCarrito) {
         productoEnCarrito.cantidad++;
     } else {
-        const Producto = producto.find(producto => producto.id === id);
+        const producto = productos.find(producto => producto.id === id);
         carrito.push(producto);
     }
     calcularTotal();
+    mostrarCarrito()
     //Verificamos por consola:
     console.log(carrito);
 }
@@ -181,7 +182,7 @@ vemosCarrito.addEventListener("click", () => {
     const calcularTotal = () => {
         let totalCompra = 0;
         carrito.forEach(producto => {
-            totalCompra += producto.precio = producto.cantidad;
+            totalCompra += producto.precio * producto.cantidad
         })
         total.innerHTML = `Total: $${totalCompra}`;
     }
@@ -198,8 +199,7 @@ const eliminarTodoElCarrito = () => {
     carrito = [];
     mostrarCarrito();
 }
-/*Falta localstorage*/
-
+/* localstorage para recuperar datos es por getItem y para ingresar datos es setItem*/
 
 
 
